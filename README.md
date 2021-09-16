@@ -10,8 +10,6 @@ This repository contains the EntityQuestions dataset as well as code to evaluate
   - [Citation](#citation)
 
 ## Dataset Overview
-We store all question/answer files using the [.jsonl format](https://jsonlines.org) (if you're unfamiliar, it's essentially a list of JSON objects). If you're interested, we included a file `utils/jsonl_to_json.py` that can convert from .jsonl to .json and vice-versa.
-
 The main dataset is included in `dataset/` under `train/`, `dev/`, and `test/`, each containing the randomly sampled training, development, and testing subsets, respectively. For example, the evaluation set for place-of-birth (P19) can be found in the `dataset/test/P19.test.jsonl` file.
 
 We also include all of the one-off datasets we used to generate the tables/figures presented in the paper under `dataset/one-off/`, explained below:
