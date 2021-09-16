@@ -10,11 +10,16 @@ This repository contains the EntityQuestions dataset as well as code to evaluate
   - [Citation](#citation)
 
 ## Dataset Overview
-We store all question/answer files using the .jsonl format (if you're unfamiliar, it's essentially a list of JSON objects). If you're interested, we included a file `utils/jsonl_to_json.py` that can convert from .jsonl to .json and vice-versa.
+We store all question/answer files using the [.jsonl format](https://jsonlines.org) (if you're unfamiliar, it's essentially a list of JSON objects). If you're interested, we included a file `utils/jsonl_to_json.py` that can convert from .jsonl to .json and vice-versa.
 
-The main dataset is included in `dataset/` under `train/`, `dev/`, and `test/`. We include sampled training datasets, development datasets, and testing datasets in the corresponding directory. For example, the evaluation set for place-of-birth (P19) is located in `dataset/test/P19.test.jsonl`.
+The main dataset is included in `dataset/` under `train/`, `dev/`, and `test/`, each containing the randomly sampled training, development, and testing subsets, respectively. For example, the evaluation set for place-of-birth (P19) can be found in the `dataset/test/P19.test.jsonl` file.
 
-We also include all of the one-off datasets we used to generate the tables/figures presented in the paper under `dataset/one-off/`.
+We also include all of the one-off datasets we used to generate the tables/figures presented in the paper under `dataset/one-off/`, explained below:
+
+- `one-off/common-random-buckets/` contains buckets of 1,000 randomly sampled examples, used to produce Fig. 1 of the paper (specifically for `rand-ent`).
+- `one-off/no-overlap/` contains the training/development splits for our analyses in Section 4.1 of the paper (we do not use the testing split in our analysis). These training/development sets have subject entities with no token overlap with subject entities of the randomly sampled test set (specifically for all fine-tuning in Table 2).
+- `one-off/nq-seen-buckets/` contains buckets of questions with subject entities that overlap with subject entities seen in the NQ training set, used to produce Fig. 1 of the paper (specifically for `train-ent`).
+- `one-off/similar` contains the training/development splits for the syntactically different but symantically equal question sets, used for our analyses in Section 4.1 (specifically the `similar` rows). Again, we do not use the testing split in our analysis. These questions are identical to `one-off/no-overlap/` but use a different question template.
 
 
 ## Retrieving DPR Results
