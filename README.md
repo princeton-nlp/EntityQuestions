@@ -5,6 +5,7 @@ This repository contains the EntityQuestions dataset as well as code to evaluate
   - [Dataset Overview](#dataset-overview)
   - [Retrieving DPR Results](#retrieving-dpr-results)
   - [Retrieving BM25 Results](#retrieving-bm25-results)
+  - [Evaluating Retriever Results](#evaluating-retriever-results)
   - [Bugs or Questions?](#bugs-or-questions)
   - [Citation](#citation)
 
