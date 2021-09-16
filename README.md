@@ -1,5 +1,12 @@
-# Introduction
-This repository contains the EntityQuestions dataset as well as code to evaluate retrieval results from the `Simple Entity-centric Questions Challenge Dense Retrievers` by Chris Sciavolino*, Zexuan Zhong*, Jinhyuk Lee, and Danqi Chen (* equal contribution).
+# EntityQuestions
+This repository contains the EntityQuestions dataset as well as code to evaluate retrieval results from the the paper [Simple Entity-centric Questions Challenge Dense Retrievers]() by Chris Sciavolino*, Zexuan Zhong*, Jinhyuk Lee, and Danqi Chen (* equal contribution).
+
+## Quick Links
+  - [Dataset Overview](#dataset-overview)
+  - [Retrieving DPR Results](#retrieving-dpr-results)
+  - [Retrieving BM25 Results](#retrieving-bm25-results)
+  - [Bugs or Questions?](#bugs-or-questions)
+  - [Citation](#citation)
 
 ## Dataset Overview
 We store all question/answer files using the .jsonl format (if you're unfamiliar, it's essentially a list of JSON objects). If you're interested, we included a file `utils/jsonl_to_json.py` that can convert from .jsonl to .json and vice-versa.
@@ -10,7 +17,7 @@ We also include all of the one-off datasets we used to generate the tables/figur
 
 
 ## Retrieving DPR Results
-Our analysis is based on a previous version of the DPR repository (specifically the Oct. 5 version w. hash 27a8436b070861e2fff481e37244009b48c29c09), so our commands may not be up-to-date with the March 2021 release. That said, most of the commands should be clearly transferable.
+Our analysis is based on a previous version of the DPR repository (specifically the Oct. 5 version w. hash [27a8436b070861e2fff481e37244009b48c29c09](https://github.com/facebookresearch/DPR/tree/27a8436b070861e2fff481e37244009b48c29c09)), so our commands may not be up-to-date with the March 2021 release. That said, most of the commands should be clearly transferable.
 
 First, we recommend following the setup guide from the official DPR repository. Once set up, you can download the relevant pre-trained models/indices using their download_data.py script. For our analysis, we used the DPR-NQ model and the DPR-Multi model. To run retrieval using a pre-trained model, you'll minimally need to download:
 
@@ -62,5 +69,16 @@ python -m pyserini.index -collection JsonCollection \
 ```
 
 
-## Problems? Let us know.
+## Bugs or Questions?
 Feel free to open an issue on this GitHub repository and we'd be happy to answer your questions as best we can!
+
+## Citation
+If you use our dataset or code in your research, please cite our work:
+```bibtex
+@inproceedings{sciavolino2021simple,
+   title={Simple Entity-centric Questions Challenge Dense Retrievers},
+   author={Sciavolino, Chris and Zhong, Zexuan and Lee, Jinhyuk and Chen, Danqi},
+   booktitle={Empirical Methods in Natural Language Processing (EMNLP)},
+   year={2021}
+}
+```
