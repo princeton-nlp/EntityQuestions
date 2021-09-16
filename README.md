@@ -19,7 +19,7 @@ We also include all of the one-off datasets we used to generate the tables/figur
 ## Retrieving DPR Results
 Our analysis is based on a previous version of the DPR repository (specifically the Oct. 5 version w. hash [27a8436b070861e2fff481e37244009b48c29c09](https://github.com/facebookresearch/DPR/tree/27a8436b070861e2fff481e37244009b48c29c09)), so our commands may not be up-to-date with the March 2021 release. That said, most of the commands should be clearly transferable.
 
-First, we recommend following the setup guide from the official DPR repository. Once set up, you can download the relevant pre-trained models/indices using their download_data.py script. For our analysis, we used the DPR-NQ model and the DPR-Multi model. To run retrieval using a pre-trained model, you'll minimally need to download:
+First, we recommend following the setup guide from the official DPR repository. Once set up, you can download the relevant pre-trained models/indices using their `download_data.py` script. For our analysis, we used the DPR-NQ model and the DPR-Multi model. To run retrieval using a pre-trained model, you'll minimally need to download:
 
 1. The pre-trained model
 2. The Wikipedia passage splits
@@ -66,6 +66,25 @@ python -m pyserini.index -collection JsonCollection \
     -input "path/to/generated/passages/folder/" \
     -index "path/to/desired/index/folder/" \
     -storePositions -storeDocvectors -storeRaw
+```
+
+
+## Evaluating Retriever Results
+We provide an evaluation script in `utils/accuracy.py`. The expected format is equivalent to DPR's output format. It either accepts a single file to evaluate, or a glob of multiple files if the `--glob` option is set. To evaluate a single file, you can use the following command:
+
+``` bash
+python utils/accuracy.py \
+    --results "path/to/retrieval/results.json" \
+    --k_values 1,5,20,100
+```
+
+or with a glob with:
+
+``` bash
+python utils/accuracy.py \
+    --results="path/to/glob*.test.json" \
+    --glob \
+    --k_values 1,5,20,100
 ```
 
 
