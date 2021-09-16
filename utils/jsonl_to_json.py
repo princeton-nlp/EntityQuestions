@@ -12,11 +12,11 @@ def main():
         outfile = args.output_dir + '.'.join(file.split('/')[-1].split('.')[:-1])
         if args.json_to_jsonl:
             outfile = outfile + '.jsonl'
-            dataset = ion.read_json(file)
+            dataset = ion.read_json(file, log=args.verbose)
             ion.write_jsonl(outfile, dataset, log=args.verbose)
         else:
             outfile = outfile + '.json'
-            dataset = ion.read_jsonl(file)
+            dataset = ion.read_jsonl(file, log=args.verbose)
             ion.write_json(outfile, dataset, log=args.verbose, pretty=args.pretty_json)
 
 
