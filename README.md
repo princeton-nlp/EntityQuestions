@@ -1,6 +1,8 @@
 # EntityQuestions
 This repository contains the EntityQuestions dataset as well as code to evaluate retrieval results from the the paper [Simple Entity-centric Questions Challenge Dense Retrievers]() by Chris Sciavolino*, Zexuan Zhong*, Jinhyuk Lee, and Danqi Chen (* equal contribution).
 
+*[9/16/21] This repo is not yet set in stone, we're still putting finishing touches on the tooling and documentation :)*
+
 ## Quick Links
   - [Dataset Overview](#dataset-overview)
   - [Retrieving DPR Results](#retrieving-dpr-results)
@@ -10,6 +12,37 @@ This repository contains the EntityQuestions dataset as well as code to evaluate
   - [Citation](#citation)
 
 ## Dataset Overview
+You can download a `.zip` file of the dataset [here](https://nlp.cs.princeton.edu/projects/entity-questions/dataset.zip), or using `wget` with the command:
+
+``` bash
+wget https://nlp.cs.princeton.edu/projects/entity-questions/dataset.zip
+```
+
+The unzipped directory should have the following structure:
+
+```
+dataset/
+    | train/
+        | P*.train.json     // all randomly sampled training files 
+    | dev/
+        | P*.dev.json       // all randomly sampled development files
+    | test/
+        | P*.test.json      // all randomly sampled testing files
+    | one-off/
+        | common-random-buckets/
+            | P*/
+                | bucket*.test.json
+        | no-overlap/
+            | P*/
+                | P*_no_overlap.{train,dev,test}.json
+        | nq-seen-buckets/
+            | P*/
+                bucket*.test.json
+        | similar/
+            | P*
+                | P*_similar.{train,dev,test}.json
+```
+
 The main dataset is included in `dataset/` under `train/`, `dev/`, and `test/`, each containing the randomly sampled training, development, and testing subsets, respectively. For example, the evaluation set for place-of-birth (P19) can be found in the `dataset/test/P19.test.json` file.
 
 We also include all of the one-off datasets we used to generate the tables/figures presented in the paper under `dataset/one-off/`, explained below:
@@ -49,12 +82,12 @@ We had access to a single 11Gb Nvidia RTX 2080Ti GPU w. 128G of RAM when running
 
 
 ## Retrieving BM25 Results
-We use the Pyserini implementation of BM25 for our analysis. We use the default settings and index on the same passage splits downloaded from the DPR repository. We include steps to re-create our BM25 results below.
+We use the [Pyserini](https://github.com/castorini/pyserini/) implementation of BM25 for our analysis. We use the default settings and index on the same passage splits downloaded from the DPR repository. We include steps to re-create our BM25 results below.
 
-First, we need to pre-process the DPR passage splits into the proper format for BM25 indexing. We include this file in `utils/build_bm25_ctx_passages.py`. Rather than writing all passages into a single file, you can optionally shard the passages into multiple files (specified by the `n_shards` argument). It also creates a mapping from the passage ID to the title of the article the passage is from. You can use this file as follows:
+First, we need to pre-process the DPR passage splits into the proper format for BM25 indexing. We include this file in `bm25/build_bm25_ctx_passages.py`. Rather than writing all passages into a single file, you can optionally shard the passages into multiple files (specified by the `n_shards` argument). It also creates a mapping from the passage ID to the title of the article the passage is from. You can use this file as follows:
 
 ``` bash
-python utils/build_bm25_ctx_passages.py \
+python bm25/build_bm25_ctx_passages.py \
     --wiki_passages_file "path/to/wikipedia/passage/splits.tsv" \
     --outdir "path/to/desired/output/directory/" \
     --title_index_path "path/to/desired/output/directory/.json" \
@@ -71,6 +104,18 @@ python -m pyserini.index -collection JsonCollection \
     -index "path/to/desired/index/folder/" \
     -storePositions -storeDocvectors -storeRaw
 ```
+
+Once the index is built, you can use it in the `bm25/bm25_retriever.py` script to get retrieval results for an input file:
+
+``` bash
+python bm25/bm25_retriever.py \
+    --index_path "path/to/built/bm25/index/directory/" \
+    --passage_id_to_title_path "path/to/title_index_path/from_step_1.json" \
+    --input "path/to/input/qa/file.json" \
+    --output_dir "path/to/output/directory/"
+```
+
+By default, the script will retrieve 100 passages (`--n_docs`), use string matching to determine answer presence (`--answer_type`), and take in `.json` files (`--input_file_type`). You can optionally provide a glob using the `--glob` flag. The script writes the results to the file with the same name as the input file, but in the output directory.
 
 
 ## Evaluating Retriever Results
