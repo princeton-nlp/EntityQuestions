@@ -1,5 +1,5 @@
 # EntityQuestions
-This repository contains the EntityQuestions dataset as well as code to evaluate retrieval results from the the paper [Simple Entity-centric Questions Challenge Dense Retrievers]() by Chris Sciavolino*, Zexuan Zhong*, Jinhyuk Lee, and Danqi Chen (* equal contribution).
+This repository contains the EntityQuestions dataset as well as code to evaluate retrieval results from the the paper [Simple Entity-centric Questions Challenge Dense Retrievers](https://github.com/princeton-nlp/EntityQuestions/blob/master/paper.pdf) by Chris Sciavolino*, Zexuan Zhong*, Jinhyuk Lee, and Danqi Chen (* equal contribution).
 
 *[9/16/21] This repo is not yet set in stone, we're still putting finishing touches on the tooling and documentation :) Thanks for your patience!*
 
