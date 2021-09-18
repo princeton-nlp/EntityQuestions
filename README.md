@@ -1,9 +1,10 @@
 # EntityQuestions
 This repository contains the EntityQuestions dataset as well as code to evaluate retrieval results from the the paper [Simple Entity-centric Questions Challenge Dense Retrievers]() by Chris Sciavolino*, Zexuan Zhong*, Jinhyuk Lee, and Danqi Chen (* equal contribution).
 
-*[9/16/21] This repo is not yet set in stone, we're still putting finishing touches on the tooling and documentation :)*
+*[9/16/21] This repo is not yet set in stone, we're still putting finishing touches on the tooling and documentation :) Thanks for your patience!*
 
 ## Quick Links
+  - [Installation](#installation)
   - [Dataset Overview](#dataset-overview)
   - [Retrieving DPR Results](#retrieving-dpr-results)
   - [Retrieving BM25 Results](#retrieving-bm25-results)
@@ -11,14 +12,25 @@ This repository contains the EntityQuestions dataset as well as code to evaluate
   - [Bugs or Questions?](#bugs-or-questions)
   - [Citation](#citation)
 
-## Dataset Overview
+
+## Installation
 You can download a `.zip` file of the dataset [here](https://nlp.cs.princeton.edu/projects/entity-questions/dataset.zip), or using `wget` with the command:
 
 ``` bash
-wget https://nlp.cs.princeton.edu/projects/entity-questions/dataset.zip
+$ wget https://nlp.cs.princeton.edu/projects/entity-questions/dataset.zip
 ```
 
-The unzipped directory should have the following structure:
+We include the dependencies needed to run the code in *this* repository. We recommend having a separate miniconda environment for running DPR code. You can create the environment using the following commands:
+
+``` bash
+$ conda create -n EntityQ python=3.6
+$ conda activate EntityQ
+$ pip install -r requirements.txt
+```
+
+
+## Dataset Overview
+The unzipped dataset directory should have the following structure:
 
 ```
 dataset/
@@ -145,7 +157,7 @@ If you use our dataset or code in your research, please cite our work:
 ```bibtex
 @inproceedings{sciavolino2021simple,
    title={Simple Entity-centric Questions Challenge Dense Retrievers},
-   author={Sciavolino, Chris and Zhong, Zexuan and Lee, Jinhyuk and Chen, Danqi},
+   author={Sciavolino, Christopher and Zhong, Zexuan and Lee, Jinhyuk and Chen, Danqi},
    booktitle={Empirical Methods in Natural Language Processing (EMNLP)},
    year={2021}
 }
