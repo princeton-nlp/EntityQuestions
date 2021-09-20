@@ -1,5 +1,5 @@
 # EntityQuestions
-This repository contains the EntityQuestions dataset as well as code to evaluate retrieval results from the the paper [Simple Entity-centric Questions Challenge Dense Retrievers](https://github.com/princeton-nlp/EntityQuestions/blob/master/paper.pdf) by Chris Sciavolino*, Zexuan Zhong*, Jinhyuk Lee, and Danqi Chen (* equal contribution).
+This repository contains the EntityQuestions dataset as well as code to evaluate retrieval results from the the paper [Simple Entity-centric Questions Challenge Dense Retrievers](https://arxiv.org/pdf/2109.08535.pdf) by Chris Sciavolino*, Zexuan Zhong*, Jinhyuk Lee, and Danqi Chen (* equal contribution).
 
 *[9/16/21] This repo is not yet set in stone, we're still putting finishing touches on the tooling and documentation :) Thanks for your patience!*
 
@@ -35,7 +35,7 @@ The unzipped dataset directory should have the following structure:
 ```
 dataset/
     | train/
-        | P*.train.json     // all randomly sampled training files 
+        | P*.train.json     // all randomly sampled training files
     | dev/
         | P*.dev.json       // all randomly sampled development files
     | test/
@@ -90,7 +90,7 @@ python dense_retriever.py \
     --out_file "path/to/desired/output/location.json"
 ```
 
-We had access to a single 11Gb Nvidia RTX 2080Ti GPU w. 128G of RAM when running DPR retrieval. 
+We had access to a single 11Gb Nvidia RTX 2080Ti GPU w. 128G of RAM when running DPR retrieval.
 
 
 ## Retrieving BM25 Results
