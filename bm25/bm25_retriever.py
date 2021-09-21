@@ -42,8 +42,8 @@ def main():
     print('Input files: [ {} ]'.format(', '.join(qa_files)))
 
     has_answer_fn = HAS_ANS_FNS[args.answer_type]
-    pid2title = ion.read_json(args.passage_id_to_title_path, log=True)
     open_fn = OPEN_FNS[args.input_file_type]
+    pid2title = ion.read_json(args.passage_id_to_title_path, log=True)
     searcher = SimpleSearcher(args.index_path)
 
     for qa_file in qa_files:
