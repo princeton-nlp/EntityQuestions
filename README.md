@@ -105,7 +105,7 @@ python -m torch.distributed.launch \
 	--warmup_steps 1237 \
 	--batch_size 6 \
 	--do_lower_case \
-    --model_file "path/to/pretrained/dpr/nq/model.cp" \
+    	--model_file "path/to/pretrained/dpr/nq/model.cp" \
 	--train_file "path/to/training/file.json" \
 	--dev_file "path/to/development/file.json" \
 	--output_dir "path/to/output/model/directory/" \
