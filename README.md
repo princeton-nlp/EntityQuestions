@@ -1,7 +1,6 @@
 # EntityQuestions
 This repository contains the EntityQuestions dataset as well as code to evaluate retrieval results from the the paper [Simple Entity-centric Questions Challenge Dense Retrievers](https://arxiv.org/pdf/2109.08535.pdf) by Chris Sciavolino*, Zexuan Zhong*, Jinhyuk Lee, and Danqi Chen (* equal contribution).
 
-*[9/16/21] This repo is not yet set in stone, we're still putting finishing touches on the tooling and documentation :) Thanks for your patience!*
 
 ## Quick Links
   - [Installation](#installation)
@@ -130,6 +129,7 @@ python generate_dense_embeddings.py \
 
 We preprocess using 36 shards, each with 3 11G GPUs and 32G of RAM. After processing, there should be 36 files in the `--out_file` with the name `{out_file}_{shard_id}.pkl`. To use these files as an index during retrieval (i.e. the first command in this section), you should remove the `--save_or_load_index` argument and modify your `--encoded_ctx_file` to be a glob capturing all of the files (e.g. if one file is named `embs_0.pkl`, you can use `embs_*.pkl`).
 
+
 ## Retrieving BM25 Results
 We use the [Pyserini](https://github.com/castorini/pyserini/) implementation of BM25 for our analysis. We use the default settings and index on the same passage splits downloaded from the DPR repository. We include steps to re-create our BM25 results below.
 
@@ -188,6 +188,7 @@ python utils/accuracy.py \
 
 ## Bugs or Questions?
 Feel free to open an issue on this GitHub repository and we'd be happy to answer your questions as best we can!
+
 
 ## Citation
 If you use our dataset or code in your research, please cite our work:

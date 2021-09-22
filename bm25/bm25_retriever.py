@@ -10,13 +10,23 @@ import utils.tokenizers as tokenizers
 from utils.has_answer_fn import HAS_ANS_FNS
 
 
-OPEN_FNS = {
-    'json': ion.read_json,
-    'jsonl': ion.read_jsonl,
-}
+OPEN_FNS = { 'json': ion.read_json, 'jsonl': ion.read_jsonl }
 
 
 def search(dataset, n_docs, has_answer_fn, searcher, pid2title):
+    """
+    Input
+    - dataset: List[Dict]. List of question/answer entries
+    - n_docs: int. Number of contexts to retrieve per question.
+    - has_answer_fn: Function(context, answers) -> bool. Function to determine
+        if a context contains one of the answers.
+    - searcher: pyserini.search.SimpleSearcher. Pyserini object in charge of search
+    - pid2title: Dict[str, str]. Mapping of PassageId -> Title
+
+    Output
+    - results: List[Dict]. List of retrieval results for each question/answer pair in
+        the dataset.
+    """
     results = []
     for entry in tqdm(dataset):
         question = entry['question']

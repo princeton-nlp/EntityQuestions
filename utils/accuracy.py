@@ -14,6 +14,17 @@ DEFAULT_TOKENIZER = SimpleTokenizer()
 
 
 def topk_retrieval_accuracy(results_lst, k_values, has_answer_fn, tokenizer=DEFAULT_TOKENIZER):
+    """
+    Input:
+    - results_lst: List[Dict]. Output from a retriever with retrieved contexts for each question.
+    - k_values: List[int]. List of number of contexts to consider for retrieval accuracy.
+    - has_answer_fn: Function(ctx, answers) -> bool. Function that returns true iff the context
+        dictionary contains at least one answer.
+    - tokenizer: Tokenizer=SimpleTokenizer. Takes text and parses it into a list of word tokens.
+
+    Output:
+    - k_accuracy: Dict[int, float]. Map from k-value to retrieval accuracy, represented as a float.
+    """
     k_num_correct = defaultdict(int)
     for result in tqdm(results_lst):
         answer_lst = result['answers']

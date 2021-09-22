@@ -22,6 +22,7 @@ def has_answer_field(ctx, answer_lst, tokenizer=None):
     return ctx['has_answer']
 
 
+# True iff the text, excluding the title, includes an answer.
 def string_match(ctx, answer_lst, tokenizer=None):
     tokenizer = DEFAULT_TOKENIZER if tokenizer is None else tokenizer
     text = tokenizer.tokenize(ctx['text']).words(uncased=True)
@@ -37,6 +38,7 @@ def string_match(ctx, answer_lst, tokenizer=None):
     return False
 
 
+# True iff the title starts with an answer.
 def normalized_title(ctx, answer_lst, tokenizer=None):
     for answer in answer_lst:
         answer = answer.lower().strip()
@@ -46,6 +48,7 @@ def normalized_title(ctx, answer_lst, tokenizer=None):
     return False
 
 
+# True iff the text contains at least one regex match with an answer.
 def regex(ctx, answer_lst, tokenizer=None):
     text = ctx['text']
     for answer in answer_lst:
