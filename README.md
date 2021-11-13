@@ -10,6 +10,7 @@ This repository contains the EntityQuestions dataset as well as code to evaluate
   - [Evaluating Retriever Results](#evaluating-retriever-results)
   - [Bugs or Questions?](#bugs-or-questions)
   - [Citation](#citation)
+  - [License](#license)
 
 
 ## Installation
@@ -200,3 +201,6 @@ If you use our dataset or code in your research, please cite our work:
    year={2021}
 }
 ```
+
+## License
+Our dataset and code is released under an [MIT license](LICENSE). Our dataset is derived from [T-REx](https://hadyelsahar.github.io/t-rex/) and [Wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page), which are released under an MIT license and a CC0 1.0 Universal Public Domain license, respectively.
