@@ -1,5 +1,6 @@
 import argparse
 import glob
+import json
 
 from pyserini.search import SimpleSearcher
 from tqdm import tqdm
@@ -36,7 +37,7 @@ def search(dataset, n_docs, has_answer_fn, searcher, pid2title):
         ctxs = [{
             'id': hit.docid,
             'title': title,
-            'text': hit.raw[len(title):].strip(),
+            'text': json.loads(hit.raw)['contents'][len(title):].strip(),
             'score': hit.score,
         } for hit, title in zip(hits, titles)]
         has_answers = [has_answer_fn(ctx, answer_lst) for ctx in ctxs]
