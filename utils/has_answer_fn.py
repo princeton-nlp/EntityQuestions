@@ -21,6 +21,22 @@ def normalize(text):
 def has_answer_field(ctx, answer_lst, tokenizer=None):
     return ctx['has_answer']
 
+# True iff the text, including the title, includes an answer
+def string_title_match(ctx, answer_lst, tokenizer=None):
+    tokenizer = DEFAULT_TOKENIZER if tokenizer is None else tokenizer
+    corpus = f"{ctx['title']} {ctx['text']}"
+    text = tokenizer.tokenize(corpus).words(uncased=True)
+
+    for answer in answer_lst:
+        answer = normalize(answer)
+        answer = tokenizer.tokenize(answer)
+        answer = answer.words(uncased=True)
+
+        for i in range(0, len(text) - len(answer) + 1):
+            if answer == text[i: i + len(answer)]:
+                return True
+    return False
+
 
 # True iff the text, excluding the title, includes an answer.
 def string_match(ctx, answer_lst, tokenizer=None):
@@ -74,4 +90,5 @@ HAS_ANS_FNS = {
     'regex': regex,
     'string': string_match,
     'title': normalized_title,
+    'string_title': string_title_match,
 }
